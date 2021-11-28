@@ -117,7 +117,7 @@ Connect the devices to ROS via [M5Stack](https://m5stack.com/) and [rosserial](h
       - Bluetooth MAC Address is printed on Arduino IDE Serial Monitor when M5Stack is started.
 
       - If you use the same device repeatedly, I recommend you to add these commands to init daemon like upstart or systemd.
-        
+
   - source setup.bash
 
     ```bash
