@@ -4,7 +4,7 @@
 import os
 import rospy
 import time
-from roslibpy import Message, Ros, Topic
+import roslibpy
 from std_msgs.msg import UInt16
 
 
@@ -38,23 +38,15 @@ class RoslibpyFridgeDoor():
 
     def send_rostopic(self):
         for robot in self.robot_priority_list:
-            self.ros_client = Ros(self.robot_ip_dict[robot], 9090)
-            print("wait for server")
-            self.publisher = Topic(self.ros_client, '/test_cmd_vel', 'geometry_msgs/Twist')
+            self.ros_client = roslibpy.Ros(self.robot_ip_dict[robot], 9090)
             self.ros_client.run()
-            self.publisher.publish(Message({
-                'linear': {
-                    'x': 0.5,
-                    'y': 0,
-                    'z': 0
-                },
-                'angular': {
-                    'x': 0,
-                    'y': 0,
-                    'z': 0.5
-                }
-            }))
-            rospy.loginfo('Send rostopic because the fridge door is left open')
+
+            service = roslibpy.Service(client, '/set_ludicrous_speed', 'std_srvs/SetBool')
+            request = roslibpy.ServiceRequest({'data': True})
+
+            print('Calling service...')
+            result = service.call(request)
+            print('Service response: {}'.format(result))
             break
 
 if __name__ == '__main__':
