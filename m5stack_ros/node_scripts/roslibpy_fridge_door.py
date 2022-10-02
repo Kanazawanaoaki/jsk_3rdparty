@@ -15,7 +15,7 @@ class RoslibpyFridgeDoor():
     def __init__(self):
         # self.robot_ip_dict = {'fetch15':'133.11.216.217', 'pr1040':'133.11.216.211'} # これは全タスクプログラム共通
         # self.robot_ip_dict = {'fetch15':'133.11.216.217', 'pr1040':'133.11.216.211', 'mypc':'133.11.216.149'}
-        self.robot_ip_dict = {'fetch15':'133.11.216.149', 'pr1040':'133.11.216.211'} # for tmp exec
+        self.robot_ip_dict = {'fetch15':'133.11.216.149', 'pr1040':'133.11.216.153'} # for tmp exec
         self.robot_ability_dict = {'fetch15':{'move':'inside', 'silent_move':'high', 'arm':'single', 'contact':'low', 'dialogue':'able', 'looks':'normal'},
                                    'pr1040':{'move':'inside', 'silent_move':'high', 'arm':'dual', 'contact':'high', 'dialogue':'able', 'looks':'normal'},
                                    'Spot':{'move':'inside_outside', 'silent_move':'low', 'arm':'single', 'contact':'high', 'dialogue':'unable', 'looks':'subtle'},
@@ -33,7 +33,8 @@ class RoslibpyFridgeDoor():
         rospy.Subscriber('fetch_robot_state', Bool, self.fetch_state_cb)
         self.tof = None
         self.tof_threshold = 30
-        self.door_open_threshold = 60 # 60s = 1min
+        # self.door_open_threshold = 60 # 60s = 1min
+        self.door_open_threshold = 30 # 60s = 1min
         self.door_open_flag = False
         self.door_open_time = None
 
@@ -49,10 +50,10 @@ class RoslibpyFridgeDoor():
         else: # when door is not open
             self.door_open_flag = False
 
-    def pr2_sate_cb(self, msg):
+    def pr2_state_cb(self, msg):
         self.robot_state_dict['pr1040'] = msg.data
 
-    def fetch_sate_cb(self, msg):
+    def fetch_state_cb(self, msg):
         self.robot_state_dict['fetch15'] = msg.data
 
     def calc_priority(self):
@@ -117,7 +118,7 @@ class RoslibpyFridgeDoor():
             self.ros_client = roslibpy.Ros(self.robot_ip_dict[robot[0]], 9090)
             self.ros_client.run()
 
-            service = roslibpy.Service(self.ros_client, '/firdge_pi_task', 'jsk_2022_09_fridge_pi/FridgePiOrder')
+            service = roslibpy.Service(self.ros_client, '/fridge_pi_task', 'jsk_2022_09_fridge_pi/FridgePiOrder')
             request = roslibpy.ServiceRequest({'task': self.task_name})
 
             print('Calling service...')
@@ -132,7 +133,7 @@ class RoslibpyFridgeDoor():
 if __name__ == '__main__':
     rospy.init_node('roslibpy_fridge_door')
     rfd = RoslibpyFridgeDoor()
-    rfd.send_order()
+    # rfd.send_order()
     # import ipdb
     # ipdb.set_trace()
-    # rospy.spin()
+    rospy.spin()
