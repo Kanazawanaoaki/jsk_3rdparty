@@ -77,3 +77,5 @@ if __name__ == '__main__':
     # rospy.init_node('calc_fridge_door')
     cfd = CalcFridgeDoor()
     cfd.calc()
+    import ipdb
+    ipdb.set_trace()
