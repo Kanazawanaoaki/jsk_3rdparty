@@ -9,6 +9,7 @@
   <!-- add for upper camera -->
   <include file="$(find m5stack_ros)/launch/timer_cam.launch">
     <arg name="port" value="/dev/UpperCamera" />
+    <arg name="baud" value="750000" />
     <arg name="namespace" value="upper_camera" />
     <arg name="rosserial_name" value="rosserial_upper_camera" />
   </include>

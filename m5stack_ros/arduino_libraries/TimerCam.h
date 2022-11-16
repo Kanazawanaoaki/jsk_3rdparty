@@ -41,7 +41,9 @@ void setupBattery() {
 }
 
 void setupTimerCam() {
-    Serial.begin(115200);
+    /* Serial.begin(115200); */
+    /* Serial.begin(500000); */
+    Serial.begin(750000);
     Serial.setDebugOutput(true);
     Serial.println();
     pinMode(2, OUTPUT);
@@ -68,7 +70,8 @@ void setupTimerCam() {
     config.pin_reset = RESET_GPIO_NUM;
     config.xclk_freq_hz = 20000000;
     config.pixel_format = PIXFORMAT_JPEG;
-    config.frame_size = FRAMESIZE_UXGA;
+    /* config.frame_size = FRAMESIZE_UXGA; */
+    config.frame_size = FRAMESIZE_QVGA;
     config.jpeg_quality = 10; //10-63 lower number means higher quality
     config.fb_count = 2;
 
@@ -93,7 +96,8 @@ void setupTimerCam() {
     // You can also change config.jpeg_quality to reduce each image size
     // Available formats:
     // https://github.com/espressif/esp32-camera/blob/7b6f020939be574b1da9d4668327321edefd4e8d/driver/include/sensor.h#L81-L107
-    s->set_framesize(s, FRAMESIZE_VGA); // 640x480
+    /* s->set_framesize(s, FRAMESIZE_VGA); // 640x480 */
+    s->set_framesize(s, FRAMESIZE_QVGA); // 320x240
 }
 
 void readBattery() {
