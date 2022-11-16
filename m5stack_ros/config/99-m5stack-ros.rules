@@ -1,6 +1,8 @@
-# For detail, see https://github.com/jsk-ros-pkg/jsk_3rdparty/tree/master/m5stack_ros/README.md#unique-device-file-name-by-udev-rules
+# For detail, see https://github.com/jsk-ros-pkg/jsk_3rdparty/tree/master/m5stack_ros/README.md#unique-dev1;5202;0cice-file-name-by-udev-rules
 # You can access your device via /dev/[Device name] file
 
 KERNEL=="ttyUSB*",  ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", ATTRS{serial}=="023FF36D" SYMLINK+="GAS"
 
 KERNEL=="ttyUSB*",  ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", ATTRS{serial}=="01FC0B09" SYMLINK+="TOF"
+
+KERNEL=="ttyUSB*",  ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="7952448FF6" SYMLINK+="UpperCamera"

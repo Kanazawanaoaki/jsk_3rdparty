@@ -6,6 +6,13 @@
     <arg name="port" value="/dev/rfcomm1" />
   </include>
 
+  <!-- add for upper camera -->
+  <include file="$(find m5stack_ros)/launch/timer_cam.launch">
+    <arg name="port" value="/dev/UpperCamera" />
+    <arg name="namespace" value="upper_camera" />
+    <arg name="rosserial_name" value="rosserial_upper_camera" />
+  </include>
+
   <include file="$(find m5stack_ros)/launch/m5stack_ros.launch">
     <arg name="port" value="/dev/TOF" />
     <arg name="baud" value="57600" />
