@@ -31,7 +31,7 @@ class EmailRosserial(object):
         self.low_bat = False
         self.bat_level = None
         # Publish email
-        self.email_duration = rospy.get_param('~email_duration', 1 * 60 * 60)
+        self.email_duration = rospy.get_param('~email_duration', 24 * 60 * 60)
         self.pub = rospy.Publisher('email', Email, queue_size=1)
         # Check status of M5 device and sensor and send email if needed
         self.check_duration = rospy.get_param('~check_duration', 30)
