@@ -4,6 +4,7 @@
   <arg name="baud" default="115200" />
   <arg name="image" default="/timer_cam_image" />
   <arg name="gui" default="true" />
+  <arg name="use_upper" default="true" />
 
   <arg name="rosserial_name" default="fridge_contents_monitor" />
 
@@ -24,6 +25,27 @@
       rosserial_name: $(arg rosserial_name)
     </rosparam>
   </node>
+
+  <!-- add for upper camera -->
+  <group if="$(arg use_upper)">
+    <!-- Publish image from Upper M5 TimerCam -->
+    <include file="$(find m5stack_ros)/launch/timer_cam.launch">
+      <arg name="port" value="/dev/UpperCamera" />
+      <arg name="baud" value="750000" />
+      <arg name="namespace" value="upper_camera" />
+      <arg name="rosserial_name" value="rosserial_upper_camera" />
+    </include>
+
+      <!-- email_fridge_contents.py gets fridge contents images from M5 TimerCam
+       and then publish /email topic for the following email_topic.py -->
+      <node pkg="m5stack_ros" type="email_fridge_upper_camera.py" name="email_fridge_upper_camera"
+            output="screen" respawn="true">
+        <rosparam subst_value="true">
+          rosserial_name: /upper_camera/rosserial_upper_camera
+          check_duration: 86400
+        </rosparam>
+      </node>
+  </group>
 
   <!-- email_topic.py subscribes /email topic and send email -->
   <!-- For detailed usage, please see
