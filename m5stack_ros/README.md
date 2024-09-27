@@ -301,8 +301,9 @@ With the following steps, different symbolic links are created for each M5 devic
     sudo cp $(rospack find m5stack_ros)/config/99-m5stack-ros.rules /etc/udev/rules.d/
     ```
 
-  - Restart udev
+  - Reload rules and restart udev
     ```
+    sudo udevadm control --reload-rules
     sudo udevadm trigger
     ```
 
