@@ -13,10 +13,11 @@ Connect the devices to ROS via [M5Stack](https://m5stack.com/) and [rosserial](h
     ```
 
 2. Download dependencies
+   - If you are using Ros Melodic, please do the following.
     ```
     cd ~/m5stack_ros_ws/src
     wstool init
-    wstool merge ./jsk-ros-pkg/jsk_3rdparty/m5stack_ros/m5stack_ros.rosinstall
+    wstool merge ./jsk-ros-pkg/jsk_3rdparty/m5stack_ros/m5stack_ros.rosinstall.noetic ## If you use ROS Melodic, please replace noetic with melodic and run it.
     wstool update
     rosdep install --ignore-src --from-paths jsk-ros-pkg/jsk_3rdparty/m5stack_ros -y -r
     cd ~/m5stack_ros_ws
@@ -301,8 +302,9 @@ With the following steps, different symbolic links are created for each M5 devic
     sudo cp $(rospack find m5stack_ros)/config/99-m5stack-ros.rules /etc/udev/rules.d/
     ```
 
-  - Restart udev
+  - Reload rules and restart udev
     ```
+    sudo udevadm control --reload-rules
     sudo udevadm trigger
     ```
 
