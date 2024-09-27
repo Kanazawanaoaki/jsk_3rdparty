@@ -1,0 +1,5 @@
+# This is for noetic rosserial
+- git:
+    local-name: ros-drivers/rosserial
+    uri: https://github.com/ros-drivers/rosserial.git
+    version: noetic-devel
