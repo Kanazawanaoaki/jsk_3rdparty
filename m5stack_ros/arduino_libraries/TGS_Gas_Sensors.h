@@ -1,6 +1,5 @@
 // You can use M5STACK or M5ATOM_S3
-#define M5ATOM_S3
-/* #define M5STACK */
+/* #define M5ATOM_S3 */
 
 #include <m5stack_ros.h>
 #include <Wire.h>
@@ -32,8 +31,12 @@ void measureTGSSensors()
 
 void displayTGSSensors()
 {
-  M5.Lcd.setTextSize(2);
-  M5.Lcd.setCursor(10, 10);
+  #if defined(M5ATOM_S3)
+    M5.Lcd.setTextSize(1);
+  #else
+    M5.Lcd.setTextSize(2);
+  #endif
+  M5.Lcd.setCursor(0, 0);
 
   M5.Lcd.printf("analog_value: %04d\n", analog_value);
   M5.Lcd.printf("digital_value: %01d\n", digital_value);
