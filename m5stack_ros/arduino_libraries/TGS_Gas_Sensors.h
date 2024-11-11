@@ -1,5 +1,3 @@
-/* #include <M5Stack.h> */
-
 // You can use M5STACK or M5ATOM_S3
 #define M5ATOM_S3
 /* #define M5STACK */

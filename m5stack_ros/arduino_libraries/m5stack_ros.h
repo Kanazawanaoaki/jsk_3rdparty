@@ -39,8 +39,13 @@
   #define ESP_SERIAL
   #include <ros.h>
 #else
-  #define ESP_SERIAL
-  #include <ros.h>
+  #if defined(M5ATOM_S3)
+    #include <ros.h>
+    #include "ArduinoAtomS3Hardware.h"
+  #else
+    #define ESP_SERIAL
+    #include <ros.h>
+  #endif
 #endif
 
 // If ROSSERIAL_ARDUINO_BLUETOOTH is defined,
@@ -69,11 +74,20 @@
 #ifndef NH_OUTPUT_SIZE
   #define NH_OUTPUT_SIZE 8192
 #endif
-ros::NodeHandle_<ArduinoHardware,
-                 NH_MAX_SUBSCRIBERS,
-                 NH_MAX_PUBLISHERS,
-                 NH_INPUT_SIZE,
-                 NH_OUTPUT_SIZE> nh;
+
+#if defined(M5ATOM_S3)
+  ros::NodeHandle_<ArduinoAtomS3Hardware,
+    NH_MAX_SUBSCRIBERS,
+    NH_MAX_PUBLISHERS,
+    NH_INPUT_SIZE,
+    NH_OUTPUT_SIZE> nh;
+#else
+  ros::NodeHandle_<ArduinoHardware,
+    NH_MAX_SUBSCRIBERS,
+    NH_MAX_PUBLISHERS,
+    NH_INPUT_SIZE,
+    NH_OUTPUT_SIZE> nh;
+#endif
 
 void setupM5stackROS(char *name) {
   M5.begin();
