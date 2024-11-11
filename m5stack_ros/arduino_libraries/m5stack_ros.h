@@ -4,7 +4,8 @@
 // If you use M5Stack, define M5STACK
 // If you use M5StickC, define M5STICK_C
 // If you use M5StickC, define M5STICK_C_PLUS
-#if !defined(M5STACK) && !defined(M5STICK_C) && !defined(M5STICK_C_PLUS)
+// If you use M5AtomS3, define M5ATOM_S3
+#if !defined(M5STACK) && !defined(M5STICK_C) && !defined(M5STICK_C_PLUS) && !defined(M5ATOM_S3)
   #define M5STACK
 #endif
 
@@ -14,7 +15,10 @@
   #include <M5StickC.h>
 #elif defined(M5STICK_C_PLUS)
   #include <M5StickCPlus.h>
+#elif defined(M5ATOM_S3)
+  #include <M5AtomS3.h>
 #endif
+
 
 #include <esp_info.h>
 

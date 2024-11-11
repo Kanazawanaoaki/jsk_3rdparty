@@ -1,8 +1,20 @@
-#include <M5Stack.h>
+/* #include <M5Stack.h> */
+
+// You can use M5STACK or M5ATOM_S3
+#define M5ATOM_S3
+/* #define M5STACK */
+
+#include <m5stack_ros.h>
 #include <Wire.h>
 
-int gas_din=26;
-int gas_ain=36;
+#if defined(M5STACK)
+  int gas_din=26;
+  int gas_ain=36;
+#elif defined(M5ATOM_S3)
+  int gas_din=2;
+  int gas_ain=1;
+#endif
+
 uint16_t analog_value;
 uint16_t digital_value;
 
