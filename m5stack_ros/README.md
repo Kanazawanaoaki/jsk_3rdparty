@@ -47,10 +47,12 @@ Connect the devices to ROS via [M5Stack](https://m5stack.com/) and [rosserial](h
     - Install esp32 by Espressif Systems (Tools -> Board -> Boards Manager -> esp32)
       - Please select version 2.0.0 (> 2.0.1 has bug, 2.0.1 does not work with `TimerCam`).
     - Install M5Stack version 0.3.6 ~ 0.4.0 by [M5Stack](https://github.com/m5stack/M5Stack/tree/0.3.6) (Tools -> Manage Libraries -> M5Stack)
+    - For M5AtomS3, install M5AtomS3 version 0.0.3
     - Select correct board type (Tools -> Board -> ESP32 Arduino)
       - M5Stack Grey/Base: M5Stack-Core-ESP32
       - M5Stack Fire: M5Stack-Fire
       - Timer Camera F: M5Stack-Timer-CAM
+      - M5AtomS3: M5Stack-ATOMS3
 
   - Add dependent libraries to arduino library. This script installs libraries that cannot be installed from the Arduino IDE GUI.
 
